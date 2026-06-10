@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Een interactieve verjaardagswebsite voor de 82e verjaardag van Opa Bert Emmers. Vier zijn liefde voor fietsen en zijn inzet voor Broederlijk Delen!">
+  <title>Gefeliciteerd Opa Bert - 82 Jaar!</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Canvas for Celebration Effects (Fireworks / Confetti) -->
+  <canvas id="celebration-canvas"></canvas>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="main-nav">
+    <div class="nav-container">
+      <a href="#hero" class="nav-logo"><i class="fa-solid fa-bicycle"></i> Bert 82</a>
+      <ul class="nav-links">
+        <li><a href="#rit"><i class="fa-solid fa-road"></i> De Rit</a></li>
+        <li><a href="#goede-doel"><i class="fa-solid fa-hand-holding-heart"></i> Goede Doel</a></li>
+        <li><a href="#wensmuur"><i class="fa-solid fa-heart"></i> Wensmuur</a></li>
+      </ul>
+      <button class="audio-toggle" id="audio-btn" aria-label="Muziek aan/uit">
+        <i class="fa-solid fa-volume-mute"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero" id="hero">
+    <div class="hero-content">
+      <div class="badge animate-fade-in">1944 - 2026</div>
+      <h1 class="animate-slide-up">Hiep Hiep Hoera!<br><span class="highlight">Opa Bert 82!</span></h1>
+      <p class="hero-subtitle animate-slide-up-delay">Vandaag vieren we de 82e verjaardag van onze actieve fietser, familieman en weldoener.</p>
+      
+      <!-- Interactive Cycling Animation -->
+      <div class="hero-bike-container">
+        <!-- Animated Cycling Track -->
+        <div class="scenic-background">
+          <div class="cloud cloud-1"></div>
+          <div class="cloud cloud-2"></div>
+          <div class="hill hill-back"></div>
+          <div class="hill hill-front"></div>
+          <div class="trees"></div>
+        </div>
+        
+        <!-- Cyclist SVG -->
+        <svg class="cyclist-svg" viewBox="0 0 200 150" width="200" height="150">
+          <defs>
+            <clipPath id="wheel-clip">
+              <circle cx="0" cy="0" r="28" />
+            </clipPath>
+          </defs>
+          <g id="bicycle-and-rider">
+            <!-- Back Wheel -->
+            <g class="wheel wheel-back" transform="translate(50, 110)">
+              <circle cx="0" cy="0" r="28" class="tire" />
+              <circle cx="0" cy="0" r="25" class="rim" />
+              <!-- Spokes -->
+              <line x1="-25" y1="0" x2="25" y2="0" class="spoke" />
+              <line x1="0" y1="-25" x2="0" y2="25" class="spoke" />
+              <line x1="-18" y1="-18" x2="18" y2="18" class="spoke" />
+              <line x1="-18" y1="18" x2="18" y2="-18" class="spoke" />
+              <circle cx="0" cy="0" r="4" class="hub" />
+            </g>
+            
+            <!-- Front Wheel -->
+            <g class="wheel wheel-front" transform="translate(150, 110)">
+              <circle cx="0" cy="0" r="28" class="tire" />
+              <circle cx="0" cy="0" r="25" class="rim" />
+              <!-- Spokes -->
+              <line x1="-25" y1="0" x2="25" y2="0" class="spoke" />
+              <line x1="0" y1="-25" x2="0" y2="25" class="spoke" />
+              <line x1="-18" y1="-18" x2="18" y2="18" class="spoke" />
+              <line x1="-18" y1="18" x2="18" y2="-18" class="spoke" />
+              <circle cx="0" cy="0" r="4" class="hub" />
+            </g>
+
+            <!-- Chainring & Pedals -->
+            <g class="chainring-group" transform="translate(95, 110)">
+              <circle cx="0" cy="0" r="12" class="chainring" />
+              <g class="crankset">
+                <!-- Pedal Arm 1 -->
+                <line x1="0" y1="0" x2="0" y2="-20" class="crank-arm crank-arm-1" />
+                <rect x="-6" y="-23" width="12" height="6" rx="2" class="pedal pedal-1" />
+                <!-- Pedal Arm 2 -->
+                <line x1="0" y1="0" x2="0" y2="20" class="crank-arm crank-arm-2" />
+                <rect x="-6" y="17" width="12" height="6" rx="2" class="pedal pedal-2" />
+              </g>
+            </g>
+            
+            <!-- Frame -->
+            <path d="M 50 110 L 95 110 L 135 75 L 85 75 L 50 110 Z" class="frame-tube" />
+            <path d="M 95 110 L 85 75" class="frame-tube" /> <!-- Seat tube -->
+            <path d="M 150 110 L 138 65" class="fork" /> <!-- Front Fork -->
+            <line x1="130" y1="65" x2="146" y2="65" class="handlebars" />
+            <line x1="80" y1="70" x2="90" y2="70" class="saddle" />
+            
+            <!-- Rider (Opa Bert!) -->
+            <g class="rider">
+              <!-- Torso / Body -->
+              <path d="M 85 70 Q 95 45 115 45" class="rider-body" />
+              <!-- Head with Cap/Helmet -->
+              <circle cx="120" cy="35" r="9" class="rider-head" />
+              <path d="M 111 32 Q 120 23 129 32" class="rider-cap" />
+              <!-- Smiling Face Details -->
+              <path d="M 122 36 Q 124 38 122 40" class="rider-face" />
+              <!-- Arm -->
+              <path d="M 100 50 L 122 62 L 138 65" class="rider-arm" />
+              <!-- Legs (Animate via CSS/JS later or keep stylized) -->
+              <path d="M 85 70 L 90 92 L 95 90" class="rider-leg-left" />
+              <path d="M 85 70 L 100 100 L 95 130" class="rider-leg-right" />
+            </g>
+          </g>
+        </svg>
+
+        <div class="road-container">
+          <div class="road-line"></div>
+        </div>
+      </div>
+      
+      <a href="#rit" class="btn btn-primary scroll-down-btn"><i class="fa-solid fa-arrow-down"></i> Start Opa's Verjaardagsrit</a>
+    </div>
+  </header>
+
+  <!-- Interactive Timeline / Game Section -->
+  <section class="game-section" id="rit">
+    <div class="container">
+      <div class="section-title-wrap">
+        <h2>Opa's Verjaardagsrit <span class="highlight">naar 82!</span></h2>
+        <p class="section-subtitle">Help Opa Bert de finish te bereiken! Klik op de pedalen om hem vooruit te laten fietsen langs de mijlpalen van zijn leven.</p>
+      </div>
+
+      <div class="game-dashboard">
+        <!-- Interactive Map / Progress Road -->
+        <div class="map-track-container">
+          <div class="map-road">
+            <div class="map-progress-line" id="map-progress"></div>
+            
+            <!-- Milestones (Markers along the road) -->
+            <div class="map-marker active" id="marker-0" style="left: 0%;" data-km="0" data-title="De Start">
+              <span class="marker-dot"></span>
+              <span class="marker-label">0 km (1944)</span>
+            </div>
+            
+            <div class="map-marker" id="marker-1" style="left: 25%;" data-km="20" data-title="Het Gezin">
+              <span class="marker-dot"></span>
+              <span class="marker-label">20 km</span>
+            </div>
+            
+            <div class="map-marker" id="marker-2" style="left: 50%;" data-km="45" data-title="Homo Universalis">
+              <span class="marker-dot"></span>
+              <span class="marker-label">45 km</span>
+            </div>
+            
+            <div class="map-marker" id="marker-3" style="left: 75%;" data-km="65" data-title="De Ezel">
+              <span class="marker-dot"></span>
+              <span class="marker-label">65 km</span>
+            </div>
+            
+            <div class="map-marker" id="marker-4" style="left: 100%;" data-km="82" data-title="De Finish">
+              <span class="marker-dot"><i class="fa-solid fa-flag-checkered"></i></span>
+              <span class="marker-label">82 km</span>
+            </div>
+          </div>
+          
+          <!-- Moving Cyclist on the map -->
+          <div class="map-cyclist" id="map-cyclist" style="left: 0%;">
+            <i class="fa-solid fa-bicycle"></i>
+          </div>
+        </div>
+
+        <!-- Info Card displaying the current milestone info -->
+        <div class="milestone-card-container">
+          <div class="milestone-card active" id="card-0">
+            <div class="milestone-badge">Mijlpaal: De Start</div>
+            <h3>1944: Bert wordt geboren!</h3>
+            <p>Het begin van een prachtig levensverhaal. Bert Emmers wordt geboren en legt in de jaren die volgen de basis voor een leven vol passie, humor en actie. De eerste kilometers op de driewieler zijn een feit!</p>
+            <div class="milestone-visual-placeholder">
+              <div class="bike-wheel-decoration"><i class="fa-solid fa-bicycle"></i></div>
+            </div>
+          </div>
+
+          <div class="milestone-card" id="card-1">
+            <div class="milestone-badge">Mijlpaal: Het Gezin</div>
+            <h3>Samen met Lieve & de Kinderen</h3>
+            <p>Bert bouwt samen met zijn echtgenote <strong>Lieve</strong> een warm gezin op. Samen krijgen ze vier kinderen, waaronder <strong>Jo (50)</strong>, <strong>Tom (46)</strong> en <strong>Nele (44)</strong>. Hier zien we Bert trots poserend met zijn zonen!</p>
+            <div class="milestone-image-wrapper">
+              <img src="bert met 2 zonen.jpg" alt="Bert met zijn zonen Jo en Tom" class="milestone-img">
+            </div>
+          </div>
+
+          <div class="milestone-card" id="card-2">
+            <div class="milestone-badge">Mijlpaal: Uitdagingen</div>
+            <h3>Bert de Homo Universalis</h3>
+            <p>Bert staat bekend om zijn enthousiasme en sportiviteit. Geen uitdaging is hem te groot! Hier zien we hem schitteren tijdens zijn deelname aan <em>Homo Universalis</em>, waar hij laat zien dat leeftijd slechts een getal is.</p>
+            <div class="milestone-image-wrapper">
+              <img src="bert emmers doet mee aan homo universalis.jpg" alt="Bert doet mee aan Homo Universalis" class="milestone-img">
+            </div>
+          </div>
+
+          <div class="milestone-card" id="card-3">
+            <div class="milestone-badge">Mijlpaal: De Natuur in</div>
+            <h3>Op Stap met de Ezel</h3>
+            <p>Naast kilometers vreten op de racefiets geniet Bert intens van de natuur en de rust. Hier deelt hij een uniek en grappig moment samen met een ezel tijdens een van zijn wandelingen of tochten.</p>
+            <div class="milestone-image-wrapper">
+              <img src="bert met een ezel.jpg" alt="Bert met een ezel" class="milestone-img">
+            </div>
+          </div>
+
+          <div class="milestone-card" id="card-4">
+            <div class="milestone-badge">Finish: 82 Jaar!</div>
+            <h3>Gefeliciteerd Opa Bert! 🎉</h3>
+            <p>Je hebt de 82 km voltooid! Vandaag vieren we dat Bert 82 gezonde, actieve en liefdevolle jaren op de teller heeft staan. Een fantastische prestatie van een geweldige opa, man en vader!</p>
+            <div class="milestone-image-wrapper finish-visual">
+              <div class="balloons-animation">🎈🎈🎈</div>
+              <p class="finish-text">Druk hieronder op de knop om het vuurwerk te starten!</p>
+              <button class="btn btn-secondary" id="celebrate-more-btn"><i class="fa-solid fa-fireworks"></i> Start Vuurwerk!</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Game Controls -->
+        <div class="game-controls">
+          <div class="odometer-container">
+            <span class="odometer-label">Teller:</span>
+            <div class="odometer" id="odometer">000</div>
+            <span class="odometer-unit">km / jaar</span>
+          </div>
+          
+          <button class="btn btn-primary btn-lg" id="pedal-btn">
+            <span class="pedal-icon"><i class="fa-solid fa-angles-right"></i></span> Trappen!
+          </button>
+          <p class="game-hint">Klik herhaaldelijk of houd de knop ingedrukt om Bert te laten fietsen!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Charity Spotlight Section -->
+  <section class="charity-section" id="goede-doel">
+    <div class="container">
+      <div class="charity-grid">
+        <div class="charity-image-column">
+          <div class="charity-img-card">
+            <img src="bert promoot borederlijk delen.jpg" alt="Bert promoot Broederlijk Delen" class="charity-img">
+            <div class="charity-badge"><i class="fa-solid fa-heart"></i> Gedeelde Solidariteit</div>
+          </div>
+        </div>
+        
+        <div class="charity-text-column">
+          <h2>Het Warme Hart van Bert: <span class="highlight">Broederlijk Delen</span></h2>
+          <p class="lead">Opa Bert fietst niet alleen voor zijn eigen plezier en gezondheid, hij heeft ook een groot hart voor de wereld.</p>
+          <p>Al jaren zet Bert zich actief in voor <strong>Broederlijk Delen</strong>, een organisatie die strijdt tegen ongelijkheid en armoede in het Zuiden. Bert gelooft in delen, solidariteit en het ondersteunen van lokale gemeenschappen om hun eigen toekomst op te bouwen.</p>
+          
+          <div class="quote-card">
+            <p>"Delen is vermenigvuldigen. Door samen te werken en elkaar te steunen, maken we de wereld voor iedereen een stukje mooier."</p>
+            <cite>— Bert Emmers</cite>
+          </div>
+          
+          <div class="charity-cta">
+            <p><strong>Cadeautip voor Bert z'n 82e verjaardag:</strong> In plaats van een traditioneel cadeau, doet het Bert het meeste plezier als er een bijdrage wordt geleverd aan Broederlijk Delen.</p>
+            <a href="https://broederlijkdelen.be" target="_blank" rel="noopener noreferrer" class="btn btn-primary"><i class="fa-solid fa-hand-holding-heart"></i> Steun Broederlijk Delen</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wishes Wall (Wensmuur) Section -->
+  <section class="wishes-section" id="wensmuur">
+    <div class="container">
+      <div class="section-title-wrap">
+        <h2>De Wensmuur voor <span class="highlight">Opa Bert</span></h2>
+        <p class="section-subtitle">Laat een felicitatie of mooie herinnering achter voor Bert z'n 82e verjaardag!</p>
+      </div>
+
+      <!-- Polaroid wishes grid -->
+      <div class="wishes-grid" id="wishes-grid">
+        <!-- Preloaded Wish 1: Lieve -->
+        <div class="wish-card wish-lieve">
+          <div class="wish-pin"></div>
+          <p class="wish-text">"Lieve Bert, al vele jaren wandelen en fietsen we samen door het leven. Op naar nog vele mooie, gezonde jaren samen!"</p>
+          <div class="wish-author">- Lieve</div>
+        </div>
+
+        <!-- Preloaded Wish 2: Jo -->
+        <div class="wish-card">
+          <div class="wish-pin"></div>
+          <p class="wish-text">"Gefeliciteerd pa met je 82e verjaardag! Blijf zo actief en geniet van elke kilometer op de fiets! Proost!"</p>
+          <div class="wish-author">- Jo (50)</div>
+        </div>
+
+        <!-- Preloaded Wish 3: Tom -->
+        <div class="wish-card">
+          <div class="wish-pin"></div>
+          <p class="wish-text">"Fijne verjaardag pa! 82 jaar en nog steeds niet in te halen op de hellingen. Een geweldig voorbeeld voor ons allen!"</p>
+          <div class="wish-author">- Tom (46)</div>
+        </div>
+
+        <!-- Preloaded Wish 4: Nele -->
+        <div class="wish-card">
+          <div class="wish-pin"></div>
+          <p class="wish-text">"Lieve papa, van harte gefeliciteerd! Bedankt voor al je steun en je warme, gulle hart voor anderen. Een fantastische dag!"</p>
+          <div class="wish-author">- Nele (44)</div>
+        </div>
+      </div>
+
+      <!-- Add Wish Form -->
+      <div class="add-wish-container">
+        <button class="btn btn-primary" id="open-wish-form-btn"><i class="fa-solid fa-pen-to-square"></i> Schrijf een wens op de muur</button>
+        
+        <!-- Hidden Form Container -->
+        <div class="wish-form-modal" id="wish-modal">
+          <div class="wish-modal-content">
+            <button class="close-modal-btn" id="close-modal-btn">&times;</button>
+            <h3>Schrijf een verjaardagswens</h3>
+            <form id="add-wish-form">
+              <div class="form-group">
+                <label for="wish-sender">Jouw Naam:</label>
+                <input type="text" id="wish-sender" required placeholder="Bijv. Kleinkind, vriend, buur...">
+              </div>
+              <div class="form-group">
+                <label for="wish-message">Verjaardagswens / Herinnering:</label>
+                <textarea id="wish-message" rows="4" required placeholder="Schrijf hier je felicitatie voor Bert..."></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">Hang op de wensmuur!</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <p>&copy; 2026 - Speciaal gemaakt voor de 82e verjaardag van Opa Bert Emmers.</p>
+        <p class="made-with-love">Gemaakt met <i class="fa-solid fa-heart text-danger"></i> door de familie | Actief voor <a href="https://broederlijkdelen.be" target="_blank" rel="noopener">Broederlijk Delen</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Confetti library (embedded in JS/Custom Canvas code in app.js for light weight) -->
+  <script src="app.js"></script>
+</body>
+</html>
