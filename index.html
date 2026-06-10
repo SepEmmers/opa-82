@@ -28,7 +28,6 @@
       <ul class="nav-links">
         <li><a href="#rit"><i class="fa-solid fa-road"></i> De Rit</a></li>
         <li><a href="#goede-doel"><i class="fa-solid fa-hand-holding-heart"></i> Goede Doel</a></li>
-        <li><a href="#wensmuur"><i class="fa-solid fa-heart"></i> Wensmuur</a></li>
       </ul>
       <button class="audio-toggle" id="audio-btn" aria-label="Muziek aan/uit">
         <i class="fa-solid fa-volume-mute"></i>
@@ -194,7 +193,7 @@
           <div class="milestone-card" id="card-1">
             <div class="milestone-badge">Mijlpaal: Het Gezin</div>
             <h3>Samen met Lieve & de Kinderen</h3>
-            <p>Bert bouwt samen met zijn echtgenote <strong>Lieve</strong> een warm gezin op. Samen krijgen ze vier kinderen, waaronder <strong>Jo (50)</strong>, <strong>Tom (46)</strong> en <strong>Nele (44)</strong>. Hier zien we Bert trots poserend met zijn zonen!</p>
+            <p>Bert bouwt samen met zijn echtgenote <strong>Lieve</strong> een warm gezin op. Samen krijgen ze vier kinderen, waaronder <strong>Jo (50)</strong>, <strong>Tom (46)</strong> en <strong>Nele (44) (hopelijk kloppen deze leeftijden)</strong>. Hier zien we Bert trots poserend met zijn zonen!</p>
             <div class="milestone-image-wrapper">
               <img src="bert met 2 zonen.jpg" alt="Bert met zijn zonen Jo en Tom" class="milestone-img">
             </div>
@@ -212,7 +211,7 @@
           <div class="milestone-card" id="card-3">
             <div class="milestone-badge">Mijlpaal: De Natuur in</div>
             <h3>Op Stap met de Ezel</h3>
-            <p>Naast kilometers vreten op de racefiets geniet Bert intens van de natuur en de rust. Hier deelt hij een uniek en grappig moment samen met een ezel tijdens een van zijn wandelingen of tochten.</p>
+            <p>Naast kilometers vreten op de racefiets geniet Bert intens van de natuur en de rust(?). Hier deelt hij een uniek moment samen met een soortgenoot tijdens een van zijn tochten.</p>
             <div class="milestone-image-wrapper">
               <img src="bert met een ezel.jpg" alt="Bert met een ezel" class="milestone-img">
             </div>
@@ -260,12 +259,12 @@
         
         <div class="charity-text-column">
           <h2>Het Warme Hart van Bert: <span class="highlight">Broederlijk Delen</span></h2>
-          <p class="lead">Opa Bert fietst niet alleen voor zijn eigen plezier en gezondheid, hij heeft ook een groot hart voor de wereld.</p>
+          <p class="lead">Opa fietst niet alleen voor zijn eigen plezier en gezondheid, hij heeft ook een groot hart voor de wereld.</p>
           <p>Al jaren zet Bert zich actief in voor <strong>Broederlijk Delen</strong>, een organisatie die strijdt tegen ongelijkheid en armoede in het Zuiden. Bert gelooft in delen, solidariteit en het ondersteunen van lokale gemeenschappen om hun eigen toekomst op te bouwen.</p>
           
           <div class="quote-card">
-            <p>"Delen is vermenigvuldigen. Door samen te werken en elkaar te steunen, maken we de wereld voor iedereen een stukje mooier."</p>
-            <cite>— Bert Emmers</cite>
+            <p>"Delen is vermenigvuldigen. Door samen te werken en elkaar te steunen, maken we de wereld voor iedereen een stukje mooier. Of toch zoiets...."</p>
+            <cite>— Bert Emmers (totaal echte quote)</cite>
           </div>
           
           <div class="charity-cta">
@@ -278,76 +277,13 @@
   </section>
 
   <!-- Wishes Wall (Wensmuur) Section -->
-  <section class="wishes-section" id="wensmuur">
-    <div class="container">
-      <div class="section-title-wrap">
-        <h2>De Wensmuur voor <span class="highlight">Opa Bert</span></h2>
-        <p class="section-subtitle">Laat een felicitatie of mooie herinnering achter voor Bert z'n 82e verjaardag!</p>
-      </div>
-
-      <!-- Polaroid wishes grid -->
-      <div class="wishes-grid" id="wishes-grid">
-        <!-- Preloaded Wish 1: Lieve -->
-        <div class="wish-card wish-lieve">
-          <div class="wish-pin"></div>
-          <p class="wish-text">"Lieve Bert, al vele jaren wandelen en fietsen we samen door het leven. Op naar nog vele mooie, gezonde jaren samen!"</p>
-          <div class="wish-author">- Lieve</div>
-        </div>
-
-        <!-- Preloaded Wish 2: Jo -->
-        <div class="wish-card">
-          <div class="wish-pin"></div>
-          <p class="wish-text">"Gefeliciteerd pa met je 82e verjaardag! Blijf zo actief en geniet van elke kilometer op de fiets! Proost!"</p>
-          <div class="wish-author">- Jo (50)</div>
-        </div>
-
-        <!-- Preloaded Wish 3: Tom -->
-        <div class="wish-card">
-          <div class="wish-pin"></div>
-          <p class="wish-text">"Fijne verjaardag pa! 82 jaar en nog steeds niet in te halen op de hellingen. Een geweldig voorbeeld voor ons allen!"</p>
-          <div class="wish-author">- Tom (46)</div>
-        </div>
-
-        <!-- Preloaded Wish 4: Nele -->
-        <div class="wish-card">
-          <div class="wish-pin"></div>
-          <p class="wish-text">"Lieve papa, van harte gefeliciteerd! Bedankt voor al je steun en je warme, gulle hart voor anderen. Een fantastische dag!"</p>
-          <div class="wish-author">- Nele (44)</div>
-        </div>
-      </div>
-
-      <!-- Add Wish Form -->
-      <div class="add-wish-container">
-        <button class="btn btn-primary" id="open-wish-form-btn"><i class="fa-solid fa-pen-to-square"></i> Schrijf een wens op de muur</button>
-        
-        <!-- Hidden Form Container -->
-        <div class="wish-form-modal" id="wish-modal">
-          <div class="wish-modal-content">
-            <button class="close-modal-btn" id="close-modal-btn">&times;</button>
-            <h3>Schrijf een verjaardagswens</h3>
-            <form id="add-wish-form">
-              <div class="form-group">
-                <label for="wish-sender">Jouw Naam:</label>
-                <input type="text" id="wish-sender" required placeholder="Bijv. Kleinkind, vriend, buur...">
-              </div>
-              <div class="form-group">
-                <label for="wish-message">Verjaardagswens / Herinnering:</label>
-                <textarea id="wish-message" rows="4" required placeholder="Schrijf hier je felicitatie voor Bert..."></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary btn-block">Hang op de wensmuur!</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
       <div class="footer-content">
         <p>&copy; 2026 - Speciaal gemaakt voor de 82e verjaardag van Opa Bert Emmers.</p>
-        <p class="made-with-love">Gemaakt met <i class="fa-solid fa-heart text-danger"></i> door de familie | Actief voor <a href="https://broederlijkdelen.be" target="_blank" rel="noopener">Broederlijk Delen</a></p>
+        <p class="made-with-love">Gemaakt met <i class="fa-solid fa-heart text-danger"></i> door de (enige) kleinzoon | Actief voor <a href="https://broederlijkdelen.be" target="_blank" rel="noopener">Broederlijk Delen</a></p>
       </div>
     </div>
   </footer>

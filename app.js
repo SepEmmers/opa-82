@@ -445,98 +445,100 @@ document.addEventListener('DOMContentLoaded', () => {
   const wishSenderInput = document.getElementById('wish-sender');
   const wishMessageInput = document.getElementById('wish-message');
 
-  // Load and render custom wishes from local storage
-  function loadWishes() {
-    const savedWishes = JSON.parse(localStorage.getItem('opa_bert_wishes')) || [];
-    
-    savedWishes.forEach(wish => {
-      renderWishCard(wish.sender, wish.message, false);
-    });
-  }
-
-  function renderWishCard(sender, message, animate = true) {
-    const card = document.createElement('div');
-    card.className = 'wish-card';
-    
-    // Add red pin
-    const pin = document.createElement('div');
-    pin.className = 'wish-pin';
-    card.appendChild(pin);
-
-    // Add message
-    const msgPara = document.createElement('p');
-    msgPara.className = 'wish-text';
-    msgPara.textContent = `"${message}"`;
-    card.appendChild(msgPara);
-
-    // Add author
-    const authorDiv = document.createElement('div');
-    authorDiv.className = 'wish-author';
-    authorDiv.textContent = `- ${sender}`;
-    card.appendChild(authorDiv);
-
-    // Random rotation logic
-    const rot = Math.random() * 6 - 3; // between -3 and 3 degrees
-    card.style.transform = `rotate(${rot}deg)`;
-    
-    if (animate) {
-      card.style.opacity = '0';
-      card.style.transform = `rotate(${rot}deg) scale(0.8)`;
-      wishesGrid.appendChild(card);
+  if (wishesGrid && openWishFormBtn && closeWishModalBtn && wishModal && addWishForm) {
+    // Load and render custom wishes from local storage
+    function loadWishes() {
+      const savedWishes = JSON.parse(localStorage.getItem('opa_bert_wishes')) || [];
       
-      // Trigger browser paint to enable transition
-      setTimeout(() => {
-        card.style.opacity = '1';
-        card.style.transform = `rotate(${rot}deg) scale(1)`;
-        card.style.transition = 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-      }, 50);
-    } else {
-      wishesGrid.appendChild(card);
+      savedWishes.forEach(wish => {
+        renderWishCard(wish.sender, wish.message, false);
+      });
     }
-  }
 
-  // Open modal
-  openWishFormBtn.addEventListener('click', () => {
-    wishModal.classList.add('active');
-  });
+    function renderWishCard(sender, message, animate = true) {
+      const card = document.createElement('div');
+      card.className = 'wish-card';
+      
+      // Add red pin
+      const pin = document.createElement('div');
+      pin.className = 'wish-pin';
+      card.appendChild(pin);
 
-  // Close modal
-  function closeModal() {
-    wishModal.classList.remove('active');
-    addWishForm.reset();
-  }
-  
-  closeWishModalBtn.addEventListener('click', closeModal);
-  wishModal.addEventListener('click', (e) => {
-    if (e.target === wishModal) {
-      closeModal();
+      // Add message
+      const msgPara = document.createElement('p');
+      msgPara.className = 'wish-text';
+      msgPara.textContent = `"${message}"`;
+      card.appendChild(msgPara);
+
+      // Add author
+      const authorDiv = document.createElement('div');
+      authorDiv.className = 'wish-author';
+      authorDiv.textContent = `- ${sender}`;
+      card.appendChild(authorDiv);
+
+      // Random rotation logic
+      const rot = Math.random() * 6 - 3; // between -3 and 3 degrees
+      card.style.transform = `rotate(${rot}deg)`;
+      
+      if (animate) {
+        card.style.opacity = '0';
+        card.style.transform = `rotate(${rot}deg) scale(0.8)`;
+        wishesGrid.appendChild(card);
+        
+        // Trigger browser paint to enable transition
+        setTimeout(() => {
+          card.style.opacity = '1';
+          card.style.transform = `rotate(${rot}deg) scale(1)`;
+          card.style.transition = 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+        }, 50);
+      } else {
+        wishesGrid.appendChild(card);
+      }
     }
-  });
 
-  // Handle Form Submit
-  addWishForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    const sender = wishSenderInput.value.trim();
-    const message = wishMessageInput.value.trim();
-    
-    if (!sender || !message) return;
-
-    // Render immediately
-    renderWishCard(sender, message, true);
-    
-    // Save to LocalStorage
-    const savedWishes = JSON.parse(localStorage.getItem('opa_bert_wishes')) || [];
-    savedWishes.push({ sender, message });
-    localStorage.setItem('opa_bert_wishes', JSON.stringify(savedWishes));
-
-    // Sound alert!
-    playBikeBell();
+    // Open modal
+    openWishFormBtn.addEventListener('click', () => {
+      wishModal.classList.add('active');
+    });
 
     // Close modal
-    closeModal();
-  });
+    function closeModal() {
+      wishModal.classList.remove('active');
+      addWishForm.reset();
+    }
+    
+    closeWishModalBtn.addEventListener('click', closeModal);
+    wishModal.addEventListener('click', (e) => {
+      if (e.target === wishModal) {
+        closeModal();
+      }
+    });
 
-  // Run on load
-  loadWishes();
+    // Handle Form Submit
+    addWishForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const sender = wishSenderInput.value.trim();
+      const message = wishMessageInput.value.trim();
+      
+      if (!sender || !message) return;
+
+      // Render immediately
+      renderWishCard(sender, message, true);
+      
+      // Save to LocalStorage
+      const savedWishes = JSON.parse(localStorage.getItem('opa_bert_wishes')) || [];
+      savedWishes.push({ sender, message });
+      localStorage.setItem('opa_bert_wishes', JSON.stringify(savedWishes));
+
+      // Sound alert!
+      playBikeBell();
+
+      // Close modal
+      closeModal();
+    });
+
+    // Run on load
+    loadWishes();
+  }
 });
